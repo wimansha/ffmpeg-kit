@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'Apache-2.0', :file => 'LICENSE' }
   s.author       = { 'ARTHENICA' => 'open-source@arthenica.com' }
 
-  s.platform     = :ios, '14.0'
+  s.platform     = :ios, '12.0'
   s.requires_arc = true
   s.static_framework = true
 
