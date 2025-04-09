@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name         = 'ffmpeg-kit-ios'
+  s.name         = 'ffmpeg-kit-flutter'
   s.version      = '6.0.3'
   s.summary      = 'FFmpegKit iOS HTTPS Package'
   s.description  = 'A statically linked FFmpegKit iOS package with HTTPS support.'
