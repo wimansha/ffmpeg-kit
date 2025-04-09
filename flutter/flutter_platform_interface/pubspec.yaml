@@ -17,4 +17,4 @@ dependencies:
   plugin_platform_interface: ^2.1.4
 
 dev_dependencies:
-  carapacik_lints: ^1.8.1
+  carapacik_lints: 1.7.0

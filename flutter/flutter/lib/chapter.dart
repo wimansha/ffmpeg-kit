@@ -51,13 +51,14 @@ class Chapter {
   String? getEndTime() => this.getStringProperty(Chapter.keyEndTime);
 
   /// Returns all tags.
-  Map<dynamic, dynamic>? getTags() => this.getProperty(Chapter.keyTags);
+  Map<dynamic, dynamic>? getTags() =>
+      this.getProperty(Chapter.keyTags) as Map<dynamic, dynamic>;
 
   /// Returns the chapter property associated with the key.
-  String? getStringProperty(String key) => this._allProperties?[key];
+  String? getStringProperty(String key) => this._allProperties?[key] as String?;
 
   /// Returns the chapter property associated with the key.
-  num? getNumberProperty(String key) => this._allProperties?[key];
+  num? getNumberProperty(String key) => this._allProperties?[key] as num?;
 
   /// Returns the chapter property associated with the key.
   dynamic getProperty(String key) => this._allProperties?[key];
