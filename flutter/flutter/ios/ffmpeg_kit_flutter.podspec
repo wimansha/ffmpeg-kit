@@ -15,10 +15,10 @@ Pod::Spec.new do |s|
   s.source       = { :http => 'https://github.com/hrithikmtorana/ffmpeg-kit/archive/refs/tags/v6.0.3.zip' }
 
   # Source files relative to the unzipped directory structure from GitHub archive
-  s.source_files = 'ffmpeg-kit-6.0.3/ios/**/*.h', 'ffmpeg-kit-6.0.3/ios/**/*.m', 'ffmpeg-kit-6.0.3/ios/**/*.mm'
+  s.source_files = 'flutter/flutter/ios/**/*.h', 'flutter/flutter/ios/**/*.m', 'flutter/flutter/ios/**/*.mm'
 
   # Public headers if needed
-  s.public_header_files = 'ffmpeg-kit-6.0.3/ios/**/*.h'
+  s.public_header_files = 'flutter/flutter/ios/**/*.h'
 
   # Dependencies, adjust if needed
   s.frameworks = ['AVFoundation', 'CoreMedia', 'VideoToolbox', 'UIKit', 'Foundation']
