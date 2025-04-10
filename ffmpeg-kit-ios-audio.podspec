@@ -14,37 +14,37 @@
   "platforms": {
     "ios": "10"
   },
-  "requires_arc": true,
-  "libraries": [
-    "z",
-    "bz2",
-    "c++",
-    "iconv"
-  ],
-  "source": {
-    "http": "https://github.com/arthenica/ffmpeg-kit/releases/download/v6.0.LTS/ffmpeg-kit-audio-6.0.LTS-ios-framework.zip"
-  },
-  "ios": {
-    "frameworks": [
-      "AudioToolbox",
-      "CoreMedia"
-    ],
-    "vendored_frameworks": [
-      "ffmpegkit.framework",
-      "libavcodec.framework",
-      "libavdevice.framework",
-      "libavfilter.framework",
-      "libavformat.framework",
-      "libavutil.framework",
-      "libswresample.framework",
-      "libswscale.framework"
-    ]
-  },
-  "pod_target_xcconfig": {
-    "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64"
-  },
-  "user_target_xcconfig": {
-    "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64"
-  },
-  "deprecated": true
+  # "requires_arc": true,
+  # "libraries": [
+  #   "z",
+  #   "bz2",
+  #   "c++",
+  #   "iconv"
+  # ],
+  # "source": {
+  #   "http": "https://github.com/arthenica/ffmpeg-kit/releases/download/v6.0.LTS/ffmpeg-kit-audio-6.0.LTS-ios-framework.zip"
+  # },
+  # "ios": {
+  #   "frameworks": [
+  #     "AudioToolbox",
+  #     "CoreMedia"
+  #   ],
+  #   "vendored_frameworks": [
+  #     "ffmpegkit.framework",
+  #     "libavcodec.framework",
+  #     "libavdevice.framework",
+  #     "libavfilter.framework",
+  #     "libavformat.framework",
+  #     "libavutil.framework",
+  #     "libswresample.framework",
+  #     "libswscale.framework"
+  #   ]
+  # },
+  # "pod_target_xcconfig": {
+  #   "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64"
+  # },
+  # "user_target_xcconfig": {
+  #   "EXCLUDED_ARCHS[sdk=iphonesimulator*]": "arm64"
+  # },
+  # "deprecated": true
 }
