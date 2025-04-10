@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.requires_arc     = true
   s.libraries        = 'z', 'bz2', 'c++', 'iconv'
 
-  s.source           = { :http => 'https://github.com/arthenica/ffmpeg-kit/releases/download/v6.0.LTS/ffmpeg-kit-audio-6.0.LTS-ios-framework.zip' }
+  #s.source           = { :http => 'https://github.com/arthenica/ffmpeg-kit/releases/download/v6.0.LTS/ffmpeg-kit-audio-6.0.LTS-ios-framework.zip' }
   
   s.ios.frameworks   = 'AudioToolbox', 'CoreMedia'
   s.ios.vendored_frameworks = 'ffmpegkit.framework', 'libavcodec.framework', 'libavdevice.framework', 'libavfilter.framework', 'libavformat.framework', 'libavutil.framework', 'libswresample.framework', 'libswscale.framework'
