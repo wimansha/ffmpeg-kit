@@ -1,6 +1,6 @@
 {
   "name": "ffmpeg-kit-ios-audio-test",
-  "version": "6.0.LTS",
+  "version": "6.0.5",
   "summary": "FFmpeg Kit iOS Audio Shared Framework",
   "description": "Includes FFmpeg with lame, libilbc, libvorbis, opencore-amr, opus, shine, soxr, speex, twolame and vo-amrwbenc libraries enabled.",
   "homepage": "https://github.com/arthenica/ffmpeg-kit",
