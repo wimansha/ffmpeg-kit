@@ -86,7 +86,7 @@ Pod::Spec.new do |s|
   s.subspec 'audio-lts' do |ss|
     ss.source_files         = 'Classes/**/*'
     ss.public_header_files  = 'Classes/**/*.h'
-    ss.dependency 'ffmpeg-kit-ios-audio', "6.0.LTS"
+    ss.dependency 'ffmpeg-kit-ios-audio-test', "6.0.LTS"
     ss.ios.deployment_target = '14.0'
   end
 
