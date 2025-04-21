@@ -43,7 +43,9 @@ tasks.register('downloadAar') {
 }
 
 // Ensure the AAR is downloaded before the build
-preBuild.dependsOn(createLibsDir, downloadAar)
+tasks.named('compileDebugJavaWithJavac').configure {
+    dependsOn(createLibsDir, downloadAar)
+}
 
 repositories {
     google()
