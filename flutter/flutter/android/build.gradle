@@ -22,13 +22,17 @@ tasks.register('downloadAar') {
     doLast {
         if (!aarFile.exists()) {
             println "Downloading AAR from $aarUrl"
+            aarFile.parentFile.mkdirs() // ensures 'libs/' exists
             new URL(aarUrl).withInputStream { i ->
-                aarFile.parentFile.mkdirs()
                 aarFile.withOutputStream { it << i }
             }
+            println "Downloaded to: ${aarFile.absolutePath}"
+        } else {
+            println "AAR already exists at: ${aarFile.absolutePath}"
         }
     }
 }
+
 
 afterEvaluate {
     tasks.matching { it.name == 'assemble' || it.name.startsWith("assemble") }.all {
@@ -36,16 +40,18 @@ afterEvaluate {
     }
 }
 
-apply plugin: "com.android.library"
-apply plugin: "kotlin-android"
-
-repositories {
-    google()
-    mavenCentral()
-    flatDir {
-        dirs 'libs' // Looks for local .aar files here
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        flatDir {
+            dirs 'libs' // Looks for local .aar files here
+        }
     }
 }
+
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
 
 android {
     namespace = "com.arthenica.ffmpegkit.flutter"
