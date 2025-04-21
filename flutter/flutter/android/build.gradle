@@ -30,7 +30,11 @@ tasks.register('downloadAar') {
     }
 }
 
-preBuild.dependsOn(downloadAar)
+afterEvaluate {
+    tasks.matching { it.name == 'assemble' || it.name.startsWith("assemble") }.all {
+        dependsOn(downloadAar)
+    }
+}
 
 allprojects {
     repositories {
