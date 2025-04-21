@@ -14,10 +14,31 @@ buildscript {
     }
 }
 
+// Define AAR download
+def aarUrl = 'http://[::]:8000/ffmpeg-kit-full-gpl-6.0.aar'
+def aarFile = file('libs/ffmpeg-kit-full-gpl-6.0.aar')
+
+tasks.register('downloadAar') {
+    doLast {
+        if (!aarFile.exists()) {
+            println "Downloading AAR from $aarUrl"
+            new URL(aarUrl).withInputStream { i ->
+                aarFile.parentFile.mkdirs()
+                aarFile.withOutputStream { it << i }
+            }
+        }
+    }
+}
+
+preBuild.dependsOn(downloadAar)
+
 allprojects {
     repositories {
         google()
         mavenCentral()
+        flatDir {
+            dirs 'libs' // Looks for local .aar files here
+        }
     }
 }
 
@@ -53,9 +74,9 @@ android {
         versionCode 603
         versionName "6.0.3"
     }
+}
 
-    dependencies {
-        implementation("androidx.annotation:annotation:1.9.1")
-        implementation("com.arthenica:ffmpeg-kit-audio:6.0.LTS")
-    }
+dependencies {
+    implementation("androidx.annotation:annotation:1.9.1")
+    implementation(name: "ffmpeg-kit-full-gpl-6.0", ext: "aar")
 }
