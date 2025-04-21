@@ -43,7 +43,7 @@ tasks.register('downloadAar') {
 }
 
 // Ensure the AAR is downloaded before the build starts
-tasks.named('assembleDebug').configure {
+tasks.named('flutterBuild').configure {
     dependsOn(createLibsDir, downloadAar)
 }
 
