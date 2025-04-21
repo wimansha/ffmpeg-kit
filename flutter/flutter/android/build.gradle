@@ -36,18 +36,16 @@ afterEvaluate {
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        flatDir {
-            dirs 'libs' // Looks for local .aar files here
-        }
-    }
-}
-
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
+
+repositories {
+    google()
+    mavenCentral()
+    flatDir {
+        dirs 'libs' // Looks for local .aar files here
+    }
+}
 
 android {
     namespace = "com.arthenica.ffmpegkit.flutter"
