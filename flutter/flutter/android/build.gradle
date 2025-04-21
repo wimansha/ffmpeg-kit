@@ -14,53 +14,28 @@ buildscript {
     }
 }
 
-// Define AAR download
-def aarUrl = 'http://[::]:8000/ffmpeg-kit-full-gpl-6.0.aar'
-def aarFile = file('android/libs/ffmpeg-kit-full-gpl-6.0.aar')
-
-// Create 'libs' folder if it doesn't exist
-task createLibsDir {
-    doLast {
-        file('android/libs').mkdirs()
-    }
-}
-
-// Download AAR file if not present
-tasks.register('downloadAar') {
-    doLast {
-        println "Checking if AAR exists at: ${aarFile.absolutePath}"
-        if (!aarFile.exists()) {
-            println "Downloading AAR from $aarUrl"
-            new URL(aarUrl).withInputStream { i ->
-                aarFile.parentFile.mkdirs()
-                aarFile.withOutputStream { it << i }
-            }
-            println "Downloaded AAR to: ${aarFile.absolutePath}"
-        } else {
-            println "AAR already exists at: ${aarFile.absolutePath}"
-        }
-    }
-}
-
-// Ensure the AAR is downloaded before the build starts
-tasks.named('flutterBuild').configure {
-    dependsOn(createLibsDir, downloadAar)
-}
-
-repositories {
-    google()
-    mavenCentral()
-    flatDir {
-        dirs 'android/libs' // Looks for local .aar files here
-    }
-}
-
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
+def aarUrl = 'http://[::]:8000/ffmpeg-kit-full-gpl-6.0.aar'
+def aarFile = file("$projectDir/libs/ffmpeg-kit-full-gpl-6.0.aar")
+
+// Download the AAR during configuration
+if (!aarFile.exists()) {
+    println "Downloading AAR from $aarUrl..."
+    try {
+        new URL(aarUrl).withInputStream { i ->
+            aarFile.parentFile.mkdirs()
+            aarFile.withOutputStream { it << i }
+        }
+        println "Downloaded AAR to: ${aarFile.absolutePath}"
+    } catch (Exception e) {
+        println "Failed to download AAR: $e"
+    }
+}
+
 android {
     namespace = "com.arthenica.ffmpegkit.flutter"
-
     compileSdk = 35
 
     compileOptions {
@@ -86,6 +61,14 @@ android {
         minSdk = 24
         versionCode 603
         versionName "6.0.3"
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+    flatDir {
+        dirs 'libs' // Use local AARs from libs/
     }
 }
 
