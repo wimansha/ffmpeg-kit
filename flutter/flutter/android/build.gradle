@@ -16,37 +16,40 @@ buildscript {
 
 // Define AAR download
 def aarUrl = 'http://[::]:8000/ffmpeg-kit-full-gpl-6.0.aar'
-def aarFile = file('libs/ffmpeg-kit-full-gpl-6.0.aar')
+def aarFile = file('android/libs/ffmpeg-kit-full-gpl-6.0.aar')
 
+// Create 'libs' folder if it doesn't exist
+task createLibsDir {
+    doLast {
+        file('android/libs').mkdirs()
+    }
+}
+
+// Download AAR file if not present
 tasks.register('downloadAar') {
     doLast {
+        println "Checking if AAR exists at: ${aarFile.absolutePath}"
         if (!aarFile.exists()) {
             println "Downloading AAR from $aarUrl"
-            aarFile.parentFile.mkdirs() // ensures 'libs/' exists
             new URL(aarUrl).withInputStream { i ->
+                aarFile.parentFile.mkdirs()
                 aarFile.withOutputStream { it << i }
             }
-            println "Downloaded to: ${aarFile.absolutePath}"
+            println "Downloaded AAR to: ${aarFile.absolutePath}"
         } else {
             println "AAR already exists at: ${aarFile.absolutePath}"
         }
     }
 }
 
+// Ensure the AAR is downloaded before the build
+preBuild.dependsOn(createLibsDir, downloadAar)
 
-afterEvaluate {
-    tasks.matching { it.name == 'assemble' || it.name.startsWith("assemble") }.all {
-        dependsOn(downloadAar)
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        flatDir {
-            dirs 'libs' // Looks for local .aar files here
-        }
+repositories {
+    google()
+    mavenCentral()
+    flatDir {
+        dirs 'android/libs' // Looks for local .aar files here
     }
 }
 
