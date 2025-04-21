@@ -42,8 +42,8 @@ tasks.register('downloadAar') {
     }
 }
 
-// Ensure the AAR is downloaded before the build
-tasks.named('compileDebugJavaWithJavac').configure {
+// Ensure the AAR is downloaded before the build starts
+tasks.named('assembleDebug').configure {
     dependsOn(createLibsDir, downloadAar)
 }
 
