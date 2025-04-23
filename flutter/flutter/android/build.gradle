@@ -19,7 +19,7 @@ apply plugin: "kotlin-android"
 
 def aarUrl = 'http://[::]:8000/ffmpeg-kit-full-gpl-6.0.aar'
 //def aarFile = file("$projectDir/libs/ffmpeg-kit-full-gpl-6.0.aar")
-def aarFile = file("$rootDir/android/app/libs/ffmpeg-kit-full-gpl-6.0.aar")
+def aarFile = file("$rootDir/app/libs/ffmpeg-kit-full-gpl-6.0.aar")
 
 // Download the AAR during configuration
 if (!aarFile.exists()) {
