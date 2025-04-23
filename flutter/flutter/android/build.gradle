@@ -69,7 +69,7 @@ repositories {
     google()
     mavenCentral()
     flatDir {
-        dirs 'libs' // Use local AARs from libs/
+        dirs "${rootDir}/app/libs"
     }
 }
 
