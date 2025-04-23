@@ -76,4 +76,5 @@ repositories {
 dependencies {
     implementation("androidx.annotation:annotation:1.9.1")
     implementation(name: "ffmpeg-kit-full-gpl-6.0", ext: "aar")
+    implementation ("com.arthenica:smart-exception:0.1.6")
 }
