@@ -39,7 +39,7 @@ def smartExceptionJarUrl = 'http://[::]:8000/smart-exception-java-0.2.1.jar'
 def smartExceptionJarFile = file("$rootDir/app/libs/smart-exception-java-0.2.1.jar")
 
 // Download the AAR during configuration
-if (!aarFile.exists()) {
+if (!smartExceptionJarFile.exists()) {
     println "Downloading smartExceptionJar from $smartExceptionJarUrl..."
     try {
         new URL(smartExceptionJarUrl).withInputStream { i ->
