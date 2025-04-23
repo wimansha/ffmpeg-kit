@@ -18,8 +18,8 @@ apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
 def aarUrl = 'http://[::]:8000/ffmpeg-kit-audio-6.0-2.LTS.aar'
-//def aarFile = file("$projectDir/libs/ffmpeg-kit-audio-6.0-2.LTS.0.aar")
-def aarFile = file("$rootDir/app/libs/ffmpeg-kit-audio-6.0-2.LTS.0.aar")
+//def aarFile = file("$projectDir/libs/ffmpeg-kit-audio-6.0-2.LTS.aar")
+def aarFile = file("$rootDir/app/libs/ffmpeg-kit-audio-6.0-2.LTS.aar")
 
 // Download the AAR during configuration
 if (!aarFile.exists()) {
