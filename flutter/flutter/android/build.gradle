@@ -17,9 +17,9 @@ buildscript {
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
-def aarUrl = 'http://[::]:8000/ffmpeg-kit-full-gpl-6.0.aar'
-//def aarFile = file("$projectDir/libs/ffmpeg-kit-full-gpl-6.0.aar")
-def aarFile = file("$rootDir/app/libs/ffmpeg-kit-full-gpl-6.0.aar")
+def aarUrl = 'http://[::]:8000/ffmpeg-kit-audio-6.0-2.LTS.aar'
+//def aarFile = file("$projectDir/libs/ffmpeg-kit-audio-6.0-2.LTS.0.aar")
+def aarFile = file("$rootDir/app/libs/ffmpeg-kit-audio-6.0-2.LTS.0.aar")
 
 // Download the AAR during configuration
 if (!aarFile.exists()) {
@@ -32,6 +32,23 @@ if (!aarFile.exists()) {
         println "Downloaded AAR to: ${aarFile.absolutePath}"
     } catch (Exception e) {
         println "Failed to download AAR: $e"
+    }
+}
+
+def smartExceptionJarUrl = 'http://[::]:8000/smart-exception-java-0.2.1.jar'
+def smartExceptionJarFile = file("$rootDir/app/libs/smart-exception-java-0.2.1.jar")
+
+// Download the AAR during configuration
+if (!aarFile.exists()) {
+    println "Downloading smartExceptionJar from $smartExceptionJarUrl..."
+    try {
+        new URL(smartExceptionJarUrl).withInputStream { i ->
+            smartExceptionJarFile.parentFile.mkdirs()
+            smartExceptionJarFile.withOutputStream { it << i }
+        }
+        println "Downloaded smartExceptionJar to: ${smartExceptionJarFile.absolutePath}"
+    } catch (Exception e) {
+        println "Failed to download smartExceptionJar: $e"
     }
 }
 
@@ -75,6 +92,6 @@ repositories {
 
 dependencies {
     implementation("androidx.annotation:annotation:1.9.1")
-    implementation(name: "ffmpeg-kit-full-gpl-6.0", ext: "aar")
-    implementation ("com.arthenica:smart-exception:0.1.6")
+    implementation(name: "ffmpeg-kit-audio-6.0-2.LTS", ext: "aar")
+    implementation(name: "smart-exception-java-0.2.1", ext: "jar")
 }
