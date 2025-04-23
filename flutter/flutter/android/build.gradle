@@ -17,38 +17,28 @@ buildscript {
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
-def aarUrl = 'http://[::]:8000/ffmpeg-kit-audio-6.0-2.LTS.aar'
-//def aarFile = file("$projectDir/libs/ffmpeg-kit-audio-6.0-2.LTS.aar")
-def aarFile = file("$rootDir/app/libs/ffmpeg-kit-audio-6.0-2.LTS.aar")
+def filesToDownload = [
+    [url: 'http://[::]:8000/ffmpeg-kit-audio-6.0-2.LTS.aar', file: "$rootDir/app/libs/ffmpeg-kit-audio-6.0-2.LTS.aar"],
+    [url: 'http://[::]:8000/smart-exception-java-0.2.1.jar', file: "$rootDir/app/libs/smart-exception-java-0.2.1.jar"],
+    [url: 'http://[::]:8000/smart-exception-common-0.2.1.jar', file: "$rootDir/app/libs/smart-exception-common-0.2.1.jar"]
+]
 
-// Download the AAR during configuration
-if (!aarFile.exists()) {
-    println "Downloading AAR from $aarUrl..."
-    try {
-        new URL(aarUrl).withInputStream { i ->
-            aarFile.parentFile.mkdirs()
-            aarFile.withOutputStream { it << i }
+// Download files during configuration
+filesToDownload.each { item ->
+    def fileUrl = item.url
+    def file = file(item.file)
+
+    if (!file.exists()) {
+        println "Downloading file from $fileUrl..."
+        try {
+            new URL(fileUrl).withInputStream { i ->
+                file.parentFile.mkdirs()
+                file.withOutputStream { it << i }
+            }
+            println "Downloaded file to: ${file.absolutePath}"
+        } catch (Exception e) {
+            println "Failed to download file: $e"
         }
-        println "Downloaded AAR to: ${aarFile.absolutePath}"
-    } catch (Exception e) {
-        println "Failed to download AAR: $e"
-    }
-}
-
-def smartExceptionJarUrl = 'http://[::]:8000/smart-exception-java-0.2.1.jar'
-def smartExceptionJarFile = file("$rootDir/app/libs/smart-exception-java-0.2.1.jar")
-
-// Download the AAR during configuration
-if (!smartExceptionJarFile.exists()) {
-    println "Downloading smartExceptionJar from $smartExceptionJarUrl..."
-    try {
-        new URL(smartExceptionJarUrl).withInputStream { i ->
-            smartExceptionJarFile.parentFile.mkdirs()
-            smartExceptionJarFile.withOutputStream { it << i }
-        }
-        println "Downloaded smartExceptionJar to: ${smartExceptionJarFile.absolutePath}"
-    } catch (Exception e) {
-        println "Failed to download smartExceptionJar: $e"
     }
 }
 
@@ -94,4 +84,5 @@ dependencies {
     implementation("androidx.annotation:annotation:1.9.1")
     implementation(name: "ffmpeg-kit-audio-6.0-2.LTS", ext: "aar")
     implementation(name: "smart-exception-java-0.2.1", ext: "jar")
+    implementation(name: "smart-exception-common-0.2.1", ext: "jar")
 }
