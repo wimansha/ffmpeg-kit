@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.version          = '6.0.LTS'
   s.summary          = 'FFmpeg Kit for Flutter'
   s.description      = 'A Flutter plugin for running FFmpeg and FFprobe commands.'
-  s.homepage         = 'https://github.com/hrithikmtorana/ffmpeg-kit'
+  s.homepage         = 'https://github.com/saysomethingin/ffmpeg-kit'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'ARTHENICA' => 'open-source@arthenica.com' }
 
@@ -86,7 +86,7 @@ Pod::Spec.new do |s|
   s.subspec 'audio-lts' do |ss|
     ss.source_files         = 'Classes/**/*'
     ss.public_header_files  = 'Classes/**/*.h'
-    ss.dependency 'ffmpeg-kit-ios-audio-test', "6.0.LTS"
+    ss.dependency 'ssi-ffmpeg-kit-ios-audio', "6.0.LTS"
     ss.ios.deployment_target = '14.0'
   end
 
