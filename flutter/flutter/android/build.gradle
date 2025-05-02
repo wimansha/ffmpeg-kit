@@ -14,19 +14,36 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
+def filesToDownload = [
+    [url: 'https://github.com/saysomethingin/ffmpeg-kit/releases/download/6.0.3-LTS/ffmpeg-kit-audio-6.0-3.LTS.aar', file: "$rootDir/app/libs/ffmpeg-kit-audio-6.0-3.LTS.aar"],
+    [url: 'https://github.com/saysomethingin/ffmpeg-kit/releases/download/6.0.3-LTS/smart-exception-java-0.2.1.jar', file: "$rootDir/app/libs/smart-exception-java-0.2.1.jar"],
+    [url: 'https://github.com/saysomethingin/ffmpeg-kit/releases/download/6.0.3-LTS/smart-exception-common-0.2.1.jar', file: "$rootDir/app/libs/smart-exception-common-0.2.1.jar"]
+]
+
+// Download files during configuration
+filesToDownload.each { item ->
+    def fileUrl = item.url
+    def file = file(item.file)
+
+    if (!file.exists()) {
+        println "Downloading file from $fileUrl..."
+        try {
+            new URL(fileUrl).withInputStream { i ->
+                file.parentFile.mkdirs()
+                file.withOutputStream { it << i }
+            }
+            println "Downloaded file to: ${file.absolutePath}"
+        } catch (Exception e) {
+            println "Failed to download file: $e"
+        }
+    }
+}
+
 android {
     namespace = "com.arthenica.ffmpegkit.flutter"
-
     compileSdk = 35
 
     compileOptions {
@@ -53,9 +70,19 @@ android {
         versionCode 603
         versionName "6.0.3"
     }
+}
 
-    dependencies {
-        implementation("androidx.annotation:annotation:1.9.1")
-        implementation("com.arthenica:ffmpeg-kit-https:6.0-2.LTS")
+repositories {
+    google()
+    mavenCentral()
+    flatDir {
+        dirs "${rootDir}/app/libs"
     }
+}
+
+dependencies {
+    implementation("androidx.annotation:annotation:1.9.1")
+    implementation(name: "ffmpeg-kit-audio-6.0-3.LTS", ext: "aar")
+    implementation(name: "smart-exception-java-0.2.1", ext: "jar")
+    implementation(name: "smart-exception-common-0.2.1", ext: "jar")
 }
